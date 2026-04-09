@@ -1,36 +1,35 @@
-import { environment } from "../../../../environments/environment";
+import { environment } from '../../../../environments/environment';
 
 type GeneratedImage = Image | null;
 
 type Image = {
-    url: string;
-    alt: string;
-}
+  url: string;
+  alt: string;
+};
 
 export const imageGenerationUseCase = async (
   prompt: string,
   originalImage?: string,
   maskImage?: string,
 ): Promise<GeneratedImage> => {
-    try {
-        const response = await fetch(`${environment.backendApi}/image-generation`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body:JSON.stringify({
-                prompt,
-                maskImage,
-                originalImage
-            })
-        })
+  try {
+    const response = await fetch(`${environment.backendApi}/image-generation`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt,
+        maskImage,
+        originalImage,
+      }),
+    });
 
-        const { url, revisedPrompt: alt} = await response.json();
+    const { url, revisedPrompt: alt } = await response.json();
 
-        return { url, alt };
-
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
+    return { url, alt };
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
