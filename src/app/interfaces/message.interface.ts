@@ -7,4 +7,8 @@ export interface Message {
     message: string;
   };
   audio?: string;
+  imageInfo?: {
+    url: string;
+    alt: string;
+  }
 }

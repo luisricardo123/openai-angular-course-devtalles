@@ -7,6 +7,7 @@ import {
   translateTextUseCase,
   textToAudioUseCase,
   Voice,
+  imageGenerationUseCase,
 } from '../../core/use-cases';
 
 @Injectable({ providedIn: 'root' })
@@ -33,5 +34,9 @@ export class OpenAiService {
 
   public audioToText(prompt: string, file: File) {
     return audioToTextUseCase(file, prompt);
+  }
+
+  public ImageGeneration(prompt: string, originalImage?: string, maskImage?: string) {
+    return imageGenerationUseCase(prompt, originalImage, maskImage);
   }
 }
